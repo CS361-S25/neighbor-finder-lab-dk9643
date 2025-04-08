@@ -1,3 +1,10 @@
+/*
+AUTHOR: DEXTER KONG, 4/7/25
+programming assignment for a lab about finding neighbors
+implements a function that draws on a website and then another function
+that gets one point and that point is drawn in black. All neighbors are drawn in red
+*/
+
 #include "emp/web/Animate.hpp"
 #include "emp/web/web.hpp"
 #include "emp/math/math.hpp"
@@ -8,8 +15,6 @@ const int width = 50;
 const int height = 50;
 const int cubewidth = 10;
 const int cubeheight = 10;
-
-
 
 class NFAnimator : public emp::web::Animate {
     emp::web::Canvas canvas{width*cubewidth, height*cubeheight, "canvas"};
