@@ -20,27 +20,35 @@ class NFAnimator : public emp::web::Animate {
     emp::web::Canvas canvas{width*cubewidth, height*cubeheight, "canvas"};
     public:
         void FindNeighbors(int x, int y) {
-            std::vector<std::vector<int>> neighbors = {
-                {x-1, y-1},
-                {x, y-1},
-                {x+1, y-1},
-                {x-1, y},
-                {x+1, y},
-                {x-1, y+1},
-                {x, y+1},
-                {x+1, y+1},        
-            };
-            canvas.Rect(10*x, 10*y, cubewidth, cubeheight, "black", "black");
+            /*
+            This function takes in an x and y coordinate. It then
+            colors the box at that coordinate black and then all neighboring
+            cells red. This function supports a toroidal structure.
+            */
+            std::vector<std::vector<int>> neighbors;
+            //define all neighbors
+            for (int i = x-1; x < x+2; x++) {
+                for (int j = y-1; y < y+2; y++) {
+                    neighbors.push_back({i, j});
+                }
+            }
+            //color in all squares including center square red
             for (std::vector<int> neighbor : neighbors) {
                 canvas.Rect(10*emp::Mod(neighbor[0], width), 10*emp::Mod(neighbor[1], height), cubewidth, cubeheight, "red", "black");
             }
+            //overwrite center cube with black
+            canvas.Rect(10*emp::Mod(x, width), 10*emp::Mod(y, width), cubewidth, cubeheight, "black", "black");
         }
         NFAnimator() {
+            /*
+            draws up initial grid
+            */
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     canvas.Rect(cubewidth*x, cubeheight*y, cubewidth, cubeheight, "white", "black");
                 }
             }
+            //testing FindNeighbors function
             FindNeighbors(0, 0);
             FindNeighbors(25, 25);
             doc << canvas;
