@@ -27,8 +27,8 @@ class NFAnimator : public emp::web::Animate {
             */
             std::vector<std::vector<int>> neighbors;
             //define all neighbors
-            for (int i = x-1; x < x+2; x++) {
-                for (int j = y-1; y < y+2; y++) {
+            for (int i = x-1; i < x+2; i++) {
+                for (int j = y-1; j < y+2; j++) {
                     neighbors.push_back({i, j});
                 }
             }
@@ -48,9 +48,10 @@ class NFAnimator : public emp::web::Animate {
                     canvas.Rect(cubewidth*x, cubeheight*y, cubewidth, cubeheight, "white", "black");
                 }
             }
-            //testing FindNeighbors function
+            // testing FindNeighbors function
             FindNeighbors(0, 0);
             FindNeighbors(25, 25);
+            FindNeighbors(15,15);
             doc << canvas;
             doc << "Hi";
         }
